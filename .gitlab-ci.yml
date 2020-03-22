@@ -1,0 +1,21 @@
+variables:
+  DOCKER_HOST: ssh://$USER@$HOST
+
+stages:
+  - deploy
+
+deploy_stage:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -t rsa $HOST >> ~/.ssh/known_hosts
+    - apt-get update -qq && apt-get install -y -qq sshpass
+  script:
+    - sshpass -p $PASSWORD ssh $USER@$HOST 'cd /root/git/bettgefl-ster/ && ./deploy.sh'
+  only:
+    - release
+

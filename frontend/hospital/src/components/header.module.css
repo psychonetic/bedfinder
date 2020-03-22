@@ -1,0 +1,21 @@
+.header {
+  display: fixed;
+
+  top: 0;
+  left: 0;
+}
+
+.innerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  height: 70px;
+}
+

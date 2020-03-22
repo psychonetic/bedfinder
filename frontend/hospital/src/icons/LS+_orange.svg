@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 183.526px;
+        fill: #f0512e;
+        font-family: Roboto;
+        font-weight: 300;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #f0512e;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <text id="LS" class="cls-1" transform="translate(59.979 101.479) scale(0.36)">LS</text>
+  <text id="_" data-name="+" class="cls-1" transform="translate(80.979 163.479) scale(0.36)">+</text>
+  <circle class="cls-2" cx="100.063" cy="101.063" r="93.938"/>
+</svg>

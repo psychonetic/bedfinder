@@ -1,0 +1,65 @@
+version: "3.7"
+
+networks:
+  wir:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
+
+services:
+  frontend-hospital:
+    build:
+      context: ./frontend/hospital
+    image: gitlab.iisy.cloud:5050/frontend-hospital
+    environment:
+      GATSBY_API_HOST:  
+    ports:
+      - 9090:80
+    networks:
+      wir:
+        aliases:
+          - hospital.wir
+  
+  frontend-medic:
+    build:
+      context: ./frontend/medic
+    image: gitlab.iisy.cloud:5050/frontend-medic
+    ports:
+      - 7070:80
+    networks:
+      wir:
+        aliases:
+          - medic.wir
+             
+  backend-api:
+    build:
+      context: ./backend
+    image: gitlab.iisy.cloud:5050/backend-api
+    ports:
+      - 8080:8181
+    networks:
+      wir:
+        aliases:
+          - api.wir
+
+  backend.postgres:
+    image: postgres:11
+    hostname: postgres
+    restart: always
+    environment:
+        POSTGRES_PASSWORD: test
+        POSTGRES_USER: test
+        POSTGRES_DB: test
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+    volumes:
+       - postgres:/var/lib/postgresql/data
+    networks:
+      wir:
+        aliases:
+          - postgres.wir
